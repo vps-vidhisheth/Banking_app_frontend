@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Delete Bank</h2>
+
+  <div class="mb-3">
+    <label for="bankId" class="form-label">Enter Bank ID</label>
+    <input
+      type="text"
+      id="bankId"
+      [(ngModel)]="bankId"
+      class="form-control"
+      placeholder="Enter bank ID to delete"
+    />
+  </div>
+
+  <button (click)="onDelete()" class="btn btn-danger">Delete Bank</button>
+
+  <p class="mt-3" *ngIf="message">{{ message }}</p>
+</div>

@@ -1,0 +1,93 @@
+/* Container (card style) */
+.customer-form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+/* Heading */
+.customer-form-container h2 {
+  margin-bottom: 25px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #6c63ff; /* Theme color */
+}
+
+/* Inputs & Select */
+.customer-form-container input[type="text"],
+.customer-form-container input[type="email"],
+.customer-form-container input[type="password"],
+.customer-form-container select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.customer-form-container input:focus,
+.customer-form-container select:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+  outline: none;
+}
+
+/* Labels */
+.customer-form-container label {
+  display: block;
+  margin: 8px 0 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+  text-align: left;
+}
+
+/* Checkbox label inline */
+.customer-form-container label input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+/* Button */
+.customer-form-container button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: #6c63ff; /* Theme */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.customer-form-container button[type="submit"]:hover {
+  background: #5548d9; /* Darker shade */
+}
+
+.customer-form-container button[type="submit"]:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* Success & error messages */
+.success {
+  margin-top: 15px;
+  color: #2ecc71; /* Green */
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.error {
+  margin-top: 15px;
+  color: #e63946; /* Red */
+  font-size: 14px;
+  font-weight: 500;
+}

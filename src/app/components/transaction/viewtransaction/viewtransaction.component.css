@@ -1,0 +1,72 @@
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
+}
+
+/* Heading */
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.table thead {
+  background: #6c63ff;
+  color: #fff;
+}
+
+.table th, 
+.table td {
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.table tbody tr:hover {
+  background: #f9f9ff;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Empty State */
+.container div[ngIf] {
+  text-align: center;
+  font-size: 15px;
+  color: #777;
+  margin-top: 15px;
+}
+
+/* Alerts */
+.alert {
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.alert-danger {
+  background: #ffe5e5;
+  color: #b30000;
+  border: 1px solid #ffb3b3;
+}
+
+.alert-success {
+  background: #e6ffed;
+  color: #1d7a2e;
+  border: 1px solid #a3e6b1;
+}

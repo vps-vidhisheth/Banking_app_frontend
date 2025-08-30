@@ -1,0 +1,75 @@
+<div class="container">
+  <h2>All Banks</h2>
+
+  <!-- Error message -->
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <!-- Loading spinner -->
+  <div *ngIf="loading" class="text-center my-3">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Banks Table -->
+  <table class="table table-bordered" *ngIf="!loading && banks.length > 0">
+    <thead>
+      <tr>
+        <th>Bank Name</th>
+        <th>Abbreviation</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bank of banks">
+        <td>{{ bank.name }}</td>
+        <td>{{ bank.abbreviation || '-' }}</td>
+        <td>
+          <span [ngClass]="bank.is_active ? 'text-success' : 'text-danger'">
+            {{ bank.is_active ? 'Active' : 'Inactive' }}
+          </span>
+        </td>
+        <td>
+<button class="btn btn-primary btn-sm" (click)="updateBank(bank.bank_id)">Update</button>
+
+
+
+          <button class="btn btn-danger btn-sm" (click)="deleteBank(bank.bank_id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Empty state -->
+  <div *ngIf="!loading && banks.length === 0 && !error" class="mt-2">
+    No banks found.
+  </div>
+
+  <!-- Pagination controls -->
+  <div class="mt-3" *ngIf="totalPages > 1">
+    <button
+      class="btn btn-secondary btn-sm"
+      (click)="prevPage()"
+      [disabled]="page === 1 || loading">
+      Prev
+    </button>
+
+    <ng-container *ngFor="let p of [].constructor(totalPages); let i = index">
+      <button
+        class="btn btn-light btn-sm"
+        [ngClass]="{ 'btn-primary': page === i + 1 }"
+        (click)="goToPage(i + 1)"
+        [disabled]="loading">
+        {{ i + 1 }}
+      </button>
+    </ng-container>
+
+    <button
+      class="btn btn-secondary btn-sm"
+      (click)="nextPage()"
+      [disabled]="page >= totalPages || loading">
+      Next
+    </button>
+  </div>
+</div>

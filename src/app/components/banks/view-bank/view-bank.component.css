@@ -1,0 +1,107 @@
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Table styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.table th {
+  background: #3498db;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+}
+
+.table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+/* Status colors */
+.text-success {
+  color: #27ae60 !important;
+  font-weight: 500;
+}
+
+.text-danger {
+  color: #e74c3c !important;
+  font-weight: 500;
+}
+
+/* Action buttons */
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #3498db;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2980b9;
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+}
+
+.btn-secondary {
+  background: #95a5a6;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #7f8c8d;
+}
+
+/* Pagination */
+.mt-3 {
+  text-align: center;
+}
+
+.mt-3 .btn {
+  margin: 0 4px;
+}
+
+.btn-light {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+
+.btn-light:hover {
+  background: #bdc3c7;
+}
+
+.btn-primary.btn-sm {
+  background: #3498db !important;
+  color: #fff !important;
+}

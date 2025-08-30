@@ -1,0 +1,62 @@
+/* Container */
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.container h2 {
+  text-align: center;
+  color: #5548d9; /* theme purple */
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* Form labels */
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Inputs and selects */
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 6px rgba(108, 99, 255, 0.4);
+}
+
+/* Dropdown select */
+select.form-control {
+  background-color: #fff;
+}
+
+/* Submit button */
+.btn-primary {
+  background: #6c63ff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: #5548d9;
+}

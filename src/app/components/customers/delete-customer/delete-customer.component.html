@@ -1,0 +1,11 @@
+<h2>Delete Customer</h2>
+
+<p>Are you sure you want to delete customer with ID: <strong>{{ customerId }}</strong>?</p>
+
+<div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+
+<button (click)="confirmDelete()" [disabled]="isDeleting">
+  {{ isDeleting ? 'Deleting...' : 'Yes, Delete' }}
+</button>
+
+<button (click)="cancel()">Cancel</button>

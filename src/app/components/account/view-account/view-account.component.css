@@ -1,0 +1,137 @@
+/* Card container */
+.card {
+  max-width: 1100px;
+  margin: 30px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card header */
+.card-header {
+  background: #6c63ff; /* main theme color */
+  color: #fff;
+  padding: 15px 20px;
+}
+
+.card-header h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.table th {
+  background: #f5f5f5;
+  color: #333;
+  font-weight: 600;
+}
+
+.table tbody tr:hover {
+  background: #f9f9ff; /* light hover */
+}
+
+/* Button group inside table */
+.table td button {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: 1px solid #6c63ff; /* theme border */
+  background: transparent;
+  color: #6c63ff;
+  border-radius: 6px;
+  margin-right: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Last button in actions column has no extra margin */
+.table td button:last-child {
+  margin-right: 0;
+}
+
+/* Hover effect for buttons */
+.table td button:hover {
+  background: #6c63ff;
+  color: #fff;
+}
+
+/* Pagination */
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.d-flex button {
+  padding: 6px 14px;
+  font-size: 13px;
+  border: 1px solid #6c63ff;
+  background: transparent;
+  color: #6c63ff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.d-flex button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.d-flex button:hover:not(:disabled) {
+  background: #6c63ff;
+  color: #fff;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 6px;
+  padding: 12px 15px;
+  font-size: 14px;
+}
+
+.alert-success {
+  background: #e6ffed;
+  color: #0f5132;
+  border: 1px solid #a3e5b0;
+}
+
+.alert-danger {
+  background: #ffe6e6;
+  color: #842029;
+  border: 1px solid #e5a3a3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .table td button {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .d-flex {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

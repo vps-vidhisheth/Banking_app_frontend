@@ -1,0 +1,76 @@
+<div class="container">
+  <h2>All Customers</h2>
+
+  <!-- Error message -->
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <!-- Loading spinner -->
+  <div *ngIf="loading" class="text-center my-3">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Customers Table -->
+  <table class="table table-bordered" *ngIf="!loading && customers.length > 0">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td>{{ customer.first_name }}</td>
+        <td>{{ customer.last_name }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.role }}</td>
+        <td>
+          <span [ngClass]="customer.is_active ? 'text-success' : 'text-danger'">
+            {{ customer.is_active ? 'Active' : 'Inactive' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="updateCustomer(customer.customer_id)">Update</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer.customer_id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Empty state -->
+  <div *ngIf="!loading && customers.length === 0 && !error" class="mt-2">
+    No customers found.
+  </div>
+
+  <!-- Pagination controls -->
+  <div class="mt-3" *ngIf="totalPages > 1">
+    <button
+      class="btn btn-secondary btn-sm"
+      (click)="prevPage()"
+      [disabled]="page === 1 || loading">
+      Prev
+    </button>
+
+    <ng-container *ngFor="let p of [].constructor(totalPages); let i = index">
+      <button
+        class="btn btn-light btn-sm"
+        [ngClass]="{ 'btn-primary': page === i + 1 }"
+        (click)="goToPage(i + 1)"
+        [disabled]="loading">
+        {{ i + 1 }}
+      </button>
+    </ng-container>
+
+    <button
+      class="btn btn-secondary btn-sm"
+      (click)="nextPage()"
+      [disabled]="page >= totalPages || loading">
+      Next
+    </button>
+  </div>
+</div>

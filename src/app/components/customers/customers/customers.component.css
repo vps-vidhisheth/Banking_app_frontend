@@ -1,0 +1,55 @@
+/* Main container */
+.customers-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+/* Heading */
+.customers-container h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #6c63ff; /* Theme color */
+  margin-bottom: 20px;
+}
+
+/* Navigation menu */
+.customer-menu {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+/* Menu buttons */
+.menu-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #6c63ff; /* Theme */
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.menu-btn:hover {
+  background: #5548d9; /* Hover shade */
+  transform: translateY(-2px);
+}
+
+.menu-btn:active {
+  transform: scale(0.96);
+}
+
+/* Routed content area */
+.customer-content {
+  margin-top: 20px;
+  text-align: left;
+}

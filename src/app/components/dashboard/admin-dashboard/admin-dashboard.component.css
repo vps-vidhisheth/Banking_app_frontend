@@ -1,0 +1,85 @@
+/* Whole dashboard container */
+.dashboard-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+/* Title */
+.dashboard-container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #6c63ff; /* Matches login button */
+}
+
+/* Logout button */
+.logout-btn {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #6c63ff;   /* Primary theme color */
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #5548d9;   /* Hover shade */
+}
+
+/* Label + dropdown */
+label {
+  font-size: 16px;
+  margin-right: 10px;
+  color: #444;
+  font-weight: 500;
+}
+
+select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+select:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+  outline: none;
+}
+
+/* Paragraph styling */
+.dashboard-container p {
+  margin-top: 25px;
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .logout-btn {
+    top: 15px;
+    right: 20px;
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}

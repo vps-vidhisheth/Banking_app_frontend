@@ -1,0 +1,79 @@
+<!-- <div class="container mt-3">
+  <h2>Transactions</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <table class="table table-striped mt-2" *ngIf="transactions.length > 0">
+    <thead>
+      <tr>
+        <th>Transaction ID</th>
+        <th>Account ID</th>
+        <th>Related Account</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Note</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let txn of transactions">
+        <td>{{ txn.transaction_id }}</td>
+        <td>{{ txn.account_id }}</td>
+        <td>{{ txn.related_account_id || '-' }}</td>
+        <td>{{ txn.amount }}</td>
+        <td>{{ txn.type }}</td>
+        <td>{{ txn.note }}</td>
+        <td>{{ txn.created_at | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="transactions.length === 0 && !errorMessage">
+    No transactions found.
+  </div>
+</div> -->
+
+
+<div class="container mt-3">
+  <h2>Transactions</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <table class="table table-striped mt-2" *ngIf="transactions.length > 0">
+    <thead>
+      <tr>
+        <th>Transaction ID</th>
+        <th>Account ID</th>
+        <th>Related Account</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Note</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let txn of transactions">
+        <td>{{ txn.transaction_id }}</td>
+        <td>{{ txn.account_id }}</td>
+        <td>{{ txn.related_account_id || '-' }}</td>
+        <td>{{ txn.amount }}</td>
+        <td>{{ txn.type }}</td>
+        <td>{{ txn.note }}</td>
+        <td>{{ txn.created_at | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="transactions.length === 0 && !errorMessage">
+    No transactions found.
+  </div>
+
+  <!-- Pagination -->
+<div class="mt-2">
+  <button class="btn btn-primary me-2" (click)="prevPage()" [disabled]="offset === 0">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button class="btn btn-primary" (click)="nextPage()" [disabled]="offset + limit >= totalTransactions">Next</button>
+</div>
+
+
+</div>

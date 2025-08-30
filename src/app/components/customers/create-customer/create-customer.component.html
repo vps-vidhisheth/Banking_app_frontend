@@ -1,0 +1,28 @@
+<div class="customer-form-container">
+  <h2>Create New User</h2>
+
+  <form (ngSubmit)="createCustomer()" #customerForm="ngForm">
+
+    <input type="text" placeholder="First Name" [(ngModel)]="customer.firstName" name="firstName" required />
+    <input type="text" placeholder="Last Name" [(ngModel)]="customer.lastName" name="lastName" required />
+    <input type="email" placeholder="Email" [(ngModel)]="customer.email" name="email" required />
+    <input type="password" placeholder="Password" [(ngModel)]="customer.password" name="password" required />
+
+    <!-- Role Selection -->
+    <label for="role">Role:</label>
+    <select id="role" name="role" [(ngModel)]="customer.role" required>
+      <option value="admin">Admin</option>
+      <option value="staff">Staff</option>
+    </select>
+
+    <!-- Active checkbox -->
+    <label>
+      <input type="checkbox" [(ngModel)]="customer.isActive" name="isActive" /> Active
+    </label>
+
+    <button type="submit" [disabled]="!customerForm.form.valid">Create User</button>
+  </form>
+
+  <p *ngIf="success" class="success">{{ success }}</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+</div>
