@@ -3,24 +3,65 @@
 
   <form (ngSubmit)="createCustomer()" #customerForm="ngForm">
 
-    <input type="text" placeholder="First Name" [(ngModel)]="customer.firstName" name="firstName" required />
-    <input type="text" placeholder="Last Name" [(ngModel)]="customer.lastName" name="lastName" required />
-    <input type="email" placeholder="Email" [(ngModel)]="customer.email" name="email" required />
-    <input type="password" placeholder="Password" [(ngModel)]="customer.password" name="password" required />
+    <input
+      type="text"
+      placeholder="First Name"
+      [(ngModel)]="customer.firstName"
+      name="firstName"
+      required
+      (ngModelChange)="updateUrl()"
+    />
 
-    <!-- Role Selection -->
-    <label for="role">Role:</label>
-    <select id="role" name="role" [(ngModel)]="customer.role" required>
+    <input
+      type="text"
+      placeholder="Last Name"
+      [(ngModel)]="customer.lastName"
+      name="lastName"
+      required
+      (ngModelChange)="updateUrl()"
+    />
+
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="customer.email"
+      name="email"
+      required
+      (ngModelChange)="updateUrl()"
+    />
+
+    <!-- ✅ Password field outside select -->
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="customer.password"
+      name="password"
+      required
+    />
+
+    <select
+      id="role"
+      name="role"
+      [(ngModel)]="customer.role"
+      required
+      (ngModelChange)="updateUrl()"
+    >
       <option value="admin">Admin</option>
       <option value="staff">Staff</option>
     </select>
 
-    <!-- Active checkbox -->
     <label>
-      <input type="checkbox" [(ngModel)]="customer.isActive" name="isActive" /> Active
+      <input
+        type="checkbox"
+        [(ngModel)]="customer.isActive"
+        name="isActive"
+        (change)="updateUrl()"
+      /> Active
     </label>
 
-    <button type="submit" [disabled]="!customerForm.form.valid">Create User</button>
+    <button type="submit" [disabled]="!customerForm.form.valid">
+      Create User
+    </button>
   </form>
 
   <p *ngIf="success" class="success">{{ success }}</p>

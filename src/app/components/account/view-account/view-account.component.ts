@@ -145,7 +145,6 @@
 //   }
 // }
 
-
 import { Component, OnInit } from '@angular/core';
 import { AccountService, DepositWithdrawPayload, TransferPayload } from '../../../services/account.service';
 
@@ -169,10 +168,10 @@ export class ViewAccountComponent implements OnInit {
   successMessage = '';
 
   // Pagination variables
-  limit = 2;       // accounts per page
-  offset = 0;      // current page offset
-  total = 0;       // total accounts from backend
-  totalPages = 1;  // calculated total pages
+  limit = 2;
+  offset = 0;
+  total = 0;
+  totalPages = 1;
 
   constructor(private accountService: AccountService) {}
 
@@ -180,23 +179,25 @@ export class ViewAccountComponent implements OnInit {
     this.loadAccounts();
   }
 
-  loadAccounts(): void {
-    this.loading = true;
-    this.errorMessage = '';
-    this.accountService.getAll(this.offset, this.limit).subscribe({
-      next: (res: any) => {
-        this.accounts = res.data || [];
-        this.total = res.total || this.accounts.length; // backend should return total count
-        this.totalPages = Math.ceil(this.total / this.limit);
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error(err);
-        this.errorMessage = 'Failed to load accounts.';
-        this.loading = false;
-      }
-    });
-  }
+  // Load accounts from backend
+ loadAccounts(): void {
+  this.loading = true;
+  this.errorMessage = '';
+  this.accountService.getAll(this.offset, this.limit, true).subscribe({
+    next: (res: any) => {
+      this.accounts = res.data || [];
+      this.total = res.total || this.accounts.length;
+      this.totalPages = Math.ceil(this.total / this.limit);
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error(err);
+      this.errorMessage = 'Failed to load accounts.';
+      this.loading = false;
+    }
+  });
+}
+
 
   prevPage(): void {
     if (this.offset === 0) return;
@@ -210,12 +211,16 @@ export class ViewAccountComponent implements OnInit {
     this.loadAccounts();
   }
 
+  // Delete account and remove from frontend array immediately
   deleteAccount(account_id: string) {
     if (!confirm('Are you sure you want to delete this account?')) return;
+
     this.accountService.delete(account_id).subscribe({
       next: () => {
+        this.accounts = this.accounts.filter(acc => acc.account_id !== account_id);
+        this.total -= 1;
+        this.totalPages = Math.ceil(this.total / this.limit);
         this.successMessage = 'Account deleted successfully!';
-        this.loadAccounts();
       },
       error: (err) => {
         console.error(err);
@@ -224,6 +229,7 @@ export class ViewAccountComponent implements OnInit {
     });
   }
 
+  // Deposit money and update frontend balance instantly
   deposit(account_id: string) {
     const account = this.accounts.find(acc => acc.account_id === account_id);
     if (!account) return;
@@ -231,19 +237,21 @@ export class ViewAccountComponent implements OnInit {
     const amount = Number(prompt('Enter amount to deposit:'));
     if (isNaN(amount) || amount <= 0) return;
 
-    const payload: DepositWithdrawPayload = { customer_id: account.customer_id, amount };
+    const payload: DepositWithdrawPayload = { amount, customer_id: account.customer_id };
+
     this.accountService.deposit(account_id, payload).subscribe({
       next: () => {
+        account.balance += amount; // update UI instantly
         this.successMessage = 'Deposit successful!';
-        this.loadAccounts();
       },
       error: (err) => {
         console.error(err);
-        this.errorMessage = 'Deposit failed.';
+        this.errorMessage = err.error?.message || 'Deposit failed.';
       }
     });
   }
 
+  // Withdraw money and update frontend balance instantly
   withdraw(account_id: string) {
     const account = this.accounts.find(acc => acc.account_id === account_id);
     if (!account) return;
@@ -251,49 +259,73 @@ export class ViewAccountComponent implements OnInit {
     const amount = Number(prompt('Enter amount to withdraw:'));
     if (isNaN(amount) || amount <= 0) return;
 
-    const payload: DepositWithdrawPayload = { customer_id: account.customer_id, amount };
+    const payload: DepositWithdrawPayload = { amount, customer_id: account.customer_id };
+
     this.accountService.withdraw(account_id, payload).subscribe({
       next: () => {
+        account.balance -= amount; // update UI instantly
         this.successMessage = 'Withdrawal successful!';
-        this.loadAccounts();
       },
       error: (err) => {
         console.error(err);
-        this.errorMessage = 'Withdrawal failed.';
+        this.errorMessage = err.error?.message || 'Withdrawal failed.';
       }
     });
   }
 
-  transfer() {
-    const fromAccId = prompt('Enter FROM Account ID:');
-    const toAccId = prompt('Enter TO Account ID:');
-    const amount = Number(prompt('Enter amount to transfer:'));
-    if (!fromAccId || !toAccId || isNaN(amount) || amount <= 0) return;
+  // Transfer money between accounts and update frontend balances instantly
+// Transfer money between accounts and update frontend balances instantly
+transfer() {
+  const fromAccId = prompt('Enter FROM Account ID:');
+  const toAccId = prompt('Enter TO Account ID:');
+  const amount = Number(prompt('Enter amount to transfer:'));
 
-    const fromAccount = this.accounts.find(acc => acc.account_id === fromAccId);
-    const toAccount = this.accounts.find(acc => acc.account_id === toAccId);
-    if (!fromAccount || !toAccount) return;
-
-    const payload: TransferPayload = {
-      from_account_id: fromAccId,
-      to_account_id: toAccId,
-      from_customer_id: fromAccount.customer_id,
-      to_customer_id: toAccount.customer_id,
-      amount
-    };
-
-    this.accountService.transfer(payload).subscribe({
-      next: () => {
-        this.successMessage = 'Transfer successful!';
-        this.loadAccounts();
-      },
-      error: (err) => {
-        console.error(err);
-        this.errorMessage = 'Transfer failed.';
-      }
-    });
+  if (!fromAccId || !toAccId || isNaN(amount) || amount <= 0) {
+    alert('Invalid input!');
+    return;
   }
 
+  // Normalize input (trim + lowercase)
+  const fromId = fromAccId.trim().toLowerCase();
+  const toId = toAccId.trim().toLowerCase();
+
+  // Debug logs
+  console.log('Accounts in frontend:', this.accounts.map(a => a.account_id));
+  console.log('From entered:', fromId);
+  console.log('To entered:', toId);
+
+  const fromAccount = this.accounts.find(acc => acc.account_id.toLowerCase() === fromId);
+  const toAccount = this.accounts.find(acc => acc.account_id.toLowerCase() === toId);
+
+  if (!fromAccount || !toAccount) {
+    alert('Invalid account IDs!');
+    return;
+  }
+
+  const payload: TransferPayload = {
+    from_account_id: fromAccount.account_id,
+    to_account_id: toAccount.account_id,
+    from_customer_id: fromAccount.customer_id,
+    to_customer_id: toAccount.customer_id,
+    amount
+  };
+
+  this.accountService.transfer(payload).subscribe({
+    next: () => {
+      // update balances instantly in frontend
+      fromAccount.balance -= amount;
+      toAccount.balance += amount;
+      this.successMessage = 'Transfer successful!';
+    },
+    error: (err) => {
+      console.error(err);
+      this.errorMessage = err.error?.message || 'Transfer failed.';
+    }
+  });
+}
+
+
+  // Update account and reload frontend state
   updateAccount(account_id: string) {
     const account = this.accounts.find(acc => acc.account_id === account_id);
     if (!account) return;
@@ -303,8 +335,8 @@ export class ViewAccountComponent implements OnInit {
 
     this.accountService.update(account_id, { customer_id: account.customer_id, bank_id: bankId }).subscribe({
       next: () => {
+        account.bank_id = bankId; // update UI instantly
         this.successMessage = 'Account updated successfully!';
-        this.loadAccounts();
       },
       error: (err) => {
         console.error(err);

@@ -1,18 +1,9 @@
 <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
 
-  <!-- Customer ID -->
-  <div class="form-group">
-    <label for="customer_id">Customer ID:</label>
-    <input id="customer_id" type="text" formControlName="customer_id" class="form-control" placeholder="Enter Customer ID">
-    <div *ngIf="createForm.controls['customer_id'].invalid && createForm.controls['customer_id'].touched" class="text-danger">
-      Customer ID is required.
-    </div>
-  </div>
-
   <!-- Bank ID -->
   <div class="form-group mt-2">
     <label for="bank_id">Bank ID:</label>
-    <input id="bank_id" type="text" formControlName="bank_id" class="form-control" placeholder="Enter Bank ID">
+    <input id="bank_id" type="text" formControlName="bank_id" class="form-control" placeholder="Enter Bank ID" (input)="updateUrl()" />
     <div *ngIf="createForm.controls['bank_id'].invalid && createForm.controls['bank_id'].touched" class="text-danger">
       Bank ID is required.
     </div>

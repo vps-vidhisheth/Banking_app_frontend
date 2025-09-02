@@ -134,9 +134,10 @@ export class AccountService {
   }
 
   // ✅ Get all accounts with optional pagination
-  // ✅ Get all accounts with optional pagination
-getAll(offset: number = 0, limit: number = 2): Observable<any> {
-  const params: any = { offset: offset.toString(), limit: limit.toString() };
+getAll(offset: number = 0, limit: number = 2, activeOnly: boolean = true): Observable<any> {
+  let params: any = { offset: offset.toString(), limit: limit.toString() };
+  if (activeOnly) params.is_active = 'true'; // adjust based on your backend field
+
   return this.http.get(this.apiUrl, { headers: this.getAuthHeaders(), params })
     .pipe(catchError(err => throwError(() => err)));
 }
