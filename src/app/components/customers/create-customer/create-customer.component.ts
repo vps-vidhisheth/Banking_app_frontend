@@ -112,15 +112,15 @@ export class CreateCustomerComponent implements OnInit {
 
     this.customerService.createCustomer(newCustomer).subscribe({
       next: (res) => {
-        this.success = 'User created successfully ✅';
+        this.success = 'User created successfully ';
         this.error = '';
         this.customer = { firstName: '', lastName: '', email: '', password: '', role: 'staff', isActive: true };
-        // Clear URL after submission
+     
         this.router.navigate([], { relativeTo: this.route, queryParams: {} });
       },
       error: (err) => {
         console.error('Backend error:', err);
-        this.error = err.error?.message || '❌ Error creating user';
+        this.error = err.error?.message || ' Error creating user';
         this.success = '';
       }
     });

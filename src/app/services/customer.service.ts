@@ -3,21 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-// Backend paginated response type
-// export interface BackendCustomer {
-//   CustomerID?: string;
-//   id?: string;
-//   FirstName?: string;
-//   first_name?: string;
-//   LastName?: string;
-//   last_name?: string;
-//   Email?: string;
-//   email?: string;
-//   Role?: string;
-//   role?: string;
-//   IsActive?: boolean;
-//   is_active?: boolean;
-// }
 
 
 export interface BackendCustomer {

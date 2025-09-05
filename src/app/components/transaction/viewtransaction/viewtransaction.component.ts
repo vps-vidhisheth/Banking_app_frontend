@@ -1,47 +1,4 @@
-// import { Component, OnInit } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
 
-// interface Transaction {
-//   transaction_id: string;
-//   account_id: string;
-//   related_account_id?: string;
-//   amount: number;
-//   type: string;
-//   note: string;
-//   created_at: string;
-// }
-
-// @Component({
-//   selector: 'app-viewtransaction',
-//   templateUrl: './viewtransaction.component.html',
-//   styleUrls: ['./viewtransaction.component.css']
-// })
-// export class ViewTransactionComponent implements OnInit {
-
-//   transactions: Transaction[] = [];
-//   errorMessage: string = '';
-
-//   constructor(private http: HttpClient) { }
-
-//   ngOnInit(): void {
-//     this.fetchTransactions();
-//   }
-
-//   fetchTransactions(): void {
-//     this.http.get<any>('http://localhost:8080/api/v1/transactions')
-//       .subscribe({
-//         next: (response) => {
-//           // Handle paginated response
-//           this.transactions = response.data || [];
-//         },
-//         error: (err) => {
-//           console.error(err);
-//           this.errorMessage = 'Failed to load transactions';
-//         }
-//       });
-//   }
-
-// }
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -109,12 +66,12 @@ export class ViewTransactionComponent implements OnInit {
     }
   }
 
-  // ✅ total pages based on total records
+  //  total pages based on total records
   get totalPages(): number {
     return Math.ceil(this.totalTransactions / this.limit) || 1;
   }
 
-  // ✅ current page number
+  //  current page number
   get currentPage(): number {
     return Math.floor(this.offset / this.limit) + 1;
   }

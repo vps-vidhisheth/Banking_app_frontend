@@ -8,7 +8,7 @@ import { CustomerService } from '../../../services/customer.service';
   styleUrls: ['./delete-customer.component.css']
 })
 export class DeleteCustomerComponent implements OnInit {
-  customerId: string | null = null; // ✅ safer than using !
+  customerId: string | null = null; 
   isDeleting = false;
   errorMessage = '';
 
@@ -31,7 +31,7 @@ export class DeleteCustomerComponent implements OnInit {
     this.isDeleting = true;
     this.customerService.deleteCustomer(this.customerId).subscribe({
       next: () => {
-        alert('Customer deleted successfully ✅');
+        alert('Customer deleted successfully ');
         this.router.navigate(['/customers']);
       },
       error: (err) => {

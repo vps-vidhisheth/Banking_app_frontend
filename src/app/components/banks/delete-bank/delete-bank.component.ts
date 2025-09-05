@@ -21,14 +21,14 @@ export class DeleteBankComponent {
 
     this.bankService.deleteBank(this.bankId).subscribe({
       next: () => {
-        this.message = '✅ Bank deleted successfully!';
+        this.message = ' Bank deleted successfully!';
         setTimeout(() => {
           this.router.navigate(['/banks']); // redirect back to banks list
         }, 1000);
       },
       error: (err) => {
         console.error('Error deleting bank:', err);
-        this.message = '❌ Failed to delete bank. Try again.';
+        this.message = ' Failed to delete bank. Try again.';
       }
     });
   }

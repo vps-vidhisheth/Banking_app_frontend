@@ -75,7 +75,7 @@ import { LedgerModule } from './components/ledger/ledger.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true, // ✅ Very important
+      multi: true, // Very important
     }
   ],
   bootstrap: [AppComponent]

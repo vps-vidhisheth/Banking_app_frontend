@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 
 // Dashboards
-// Dashboards
 import { AdminDashboardComponent } from './components/dashboard/admin-dashboard/admin-dashboard.component';
 import { StaffDashboardComponent } from './components/dashboard/staff-dashboard/staff-dashboard.component';
 
@@ -38,7 +37,7 @@ const routes: Routes = [
   // Login page
   { path: 'login', component: LoginComponent },
 
-  // ✅ Admin Dashboard + Modules
+  //  Admin Dashboard + Modules
 {
   path: 'admin-dashboard',
   component: AdminDashboardComponent,
@@ -59,7 +58,7 @@ const routes: Routes = [
 },
 
 
-  // ✅ Staff Dashboard + Modules
+  //  Staff Dashboard + Modules
 {
   path: 'staff-dashboard',
   component: StaffDashboardComponent,

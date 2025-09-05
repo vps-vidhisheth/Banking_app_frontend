@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService, PaginatedResponse } from '../../../services/customer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
-// ✅ Match backend directly (snake_case)
 export interface Customer {
   customer_id: string;
   first_name: string;
@@ -29,7 +28,7 @@ export class ViewCustomersComponent implements OnInit {
    constructor(
     private customerService: CustomerService,
     private router: Router,
-    private route: ActivatedRoute   // <-- add this
+    private route: ActivatedRoute   
   ) {}
  ngOnInit(): void {
   const token = localStorage.getItem('jwt');
@@ -55,7 +54,7 @@ export class ViewCustomersComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.error('❌ Error fetching customers:', err);
+        console.error(' Error fetching customers:', err);
         this.error = 'Failed to load customers. Please try again later.';
         this.customers = [];
         this.loading = false;
@@ -93,7 +92,7 @@ updateCustomer(customerId: string): void {
     this.loading = true;
     this.customerService.deleteCustomer(customerId).subscribe({
       next: () => {
-        alert('Customer deleted successfully ✅');
+        alert('Customer deleted successfully ');
 
         // Adjust page if last item deleted
         if (this.customers.length === 1 && this.page > 1) {
@@ -102,7 +101,7 @@ updateCustomer(customerId: string): void {
         this.loadCustomers();
       },
       error: (err) => {
-        console.error('❌ Error deleting customer:', err);
+        console.error(' Error deleting customer:', err);
         this.loading = false;
         alert('Failed to delete customer');
       }

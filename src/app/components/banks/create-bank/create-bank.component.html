@@ -1,27 +1,3 @@
-<!-- <div class="create-bank-container">
-  <h2>Create Bank</h2>
-
-  <div *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</div>
-  <div *ngIf="successMessage" class="success-msg">{{ successMessage }}</div>
-
-  <form (ngSubmit)="createBank()" #bankForm="ngForm">
-    <label for="bankName">Bank Name:</label>
-    <input
-      type="text"
-      id="bankName"
-      [(ngModel)]="bankName"
-      name="bankName"
-      required
-      #name="ngModel"
-    />
-    <div *ngIf="name.invalid && name.touched" class="error-msg">
-      Bank name is required.
-    </div>
-
-    <button type="submit" [disabled]="isSubmitting || bankForm.invalid">Create Bank</button>
-    <button type="button" (click)="cancel()">Cancel</button>
-  </form>
-</div> -->
 
 
 <div class="create-bank-container">

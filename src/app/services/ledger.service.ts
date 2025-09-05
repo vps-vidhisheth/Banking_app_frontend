@@ -19,7 +19,7 @@ export interface Ledger {
   providedIn: 'root'
 })
 export class LedgerService {
-  private apiUrl = 'http://localhost:8080/api/ledger'; // ✅ update if needed
+  private apiUrl = 'http://localhost:8080/api/ledger'; 
 
   constructor(private http: HttpClient) {}
 

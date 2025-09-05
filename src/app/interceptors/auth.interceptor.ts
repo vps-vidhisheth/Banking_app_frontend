@@ -16,11 +16,11 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     
-    // ✅ Get token from localStorage (or sessionStorage)
+  
     const token = localStorage.getItem('jwt');
 
     if (token) {
-      // ✅ Clone request and add Authorization header
+  
       const authReq = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`

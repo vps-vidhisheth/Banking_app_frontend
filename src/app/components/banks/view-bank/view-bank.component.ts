@@ -27,7 +27,7 @@ export class ViewBankComponent implements OnInit {
   loading = false;
 
   page = 1;
-  pageSize = 2; // ✅ match backend default limit
+  pageSize = 2; 
   total = 0;
 
   private apiUrl = 'http://localhost:8080/api/v1/banks';
@@ -118,7 +118,7 @@ updateBank(bankId: string): void {
     this.loading = true;
     this.http.delete(`${this.apiUrl}/${bankId}`, { headers }).subscribe({
       next: () => {
-        alert('Bank deleted successfully ✅');
+        alert('Bank deleted successfully ');
 
         // Adjust page if last item deleted
         if (this.banks.length === 1 && this.page > 1) {
@@ -127,7 +127,7 @@ updateBank(bankId: string): void {
         this.loadBanks();
       },
       error: (err) => {
-        console.error('❌ Error deleting bank:', err);
+        console.error(' Error deleting bank:', err);
         this.loading = false;
         alert('Failed to delete bank');
       }

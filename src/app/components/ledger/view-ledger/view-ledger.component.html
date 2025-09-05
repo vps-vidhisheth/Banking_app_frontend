@@ -1,49 +1,4 @@
-<!-- <div class="container mt-3">
-  <h2>Ledger Records</h2>
 
-  <div *ngIf="errorMessage" class="alert alert-danger">
-    {{ errorMessage }}
-  </div>
-
-  <div class="table-responsive" *ngIf="ledgers.length > 0; else noData">
-    <table class="table table-bordered table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>Ledger ID</th>
-          <th>Account ID</th>
-          <th>Bank From ID</th>
-          <th>Bank To ID</th>
-          <th>Amount</th>
-          <th>Transaction Type</th>
-          <th>Entry Type</th>
-          <th>Description</th>
-          <th>Created At</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ledger of ledgers">
-          <td>{{ ledger.ledger_id }}</td>
-          <td>{{ ledger.account_id }}</td>
-          <td>{{ ledger.bank_from_id || '-' }}</td>
-          <td>{{ ledger.bank_to_id || '-' }}</td>
-          <td>{{ ledger.amount }}</td>
-          <td>{{ ledger.transaction_type }}</td>
-          <td>{{ ledger.entry_type }}</td>
-          <td>{{ ledger.description }}</td>
-          <td>{{ ledger.created_at | date:'short' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <ng-template #noData>
-    <div class="alert alert-info">No ledger records found.</div>
-  </ng-template>
-</div> -->
-
-
-<!-- view-ledger.component.html -->
-<!-- view-ledger.component.html -->
 <div class="container mt-3">
   <h2>Ledger List</h2>
 
