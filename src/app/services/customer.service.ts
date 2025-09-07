@@ -45,31 +45,6 @@ export class CustomerService {
     });
   }
 
-// getCustomers(limit: number, offset: number, filters: any = {}): Observable<any> {
-//   let params = new HttpParams()
-//     .set('limit', limit.toString())
-//     .set('offset', offset.toString());
-
-//   if (filters.search) {
-//     params = params.set('search', filters.search);
-//   }
-
-//   if (filters.first_name) {
-//     params = params.set('first_name', filters.first_name);
-//   }
-//   if (filters.last_name) {
-//     params = params.set('last_name', filters.last_name);
-//   }
-//   if (filters.email) {
-//     params = params.set('email', filters.email);
-//   }
-//   if (filters.role) {
-//     params = params.set('role', filters.role);
-//   }
-
-//   return this.http.get(`${this.apiUrl}`, { params });
-// }
-
 
 getCustomers(limit: number, offset: number, filters: any = {}): Observable<any> {
   let params = new HttpParams()

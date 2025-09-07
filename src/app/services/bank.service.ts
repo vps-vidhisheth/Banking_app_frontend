@@ -54,17 +54,20 @@ export class BankService {
     return this.http.post<Bank>(this.apiUrl, bank, { headers: this.getAuthHeaders() });
   }
 
+
   updateBank(id: string, bank: Partial<Bank>): Observable<Bank> {
     return this.http.put<Bank>(`${this.apiUrl}/${id}`, bank, { headers: this.getAuthHeaders() });
   }
+
 
   deleteBank(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 
+
   getAllBanks(): Observable<Bank[]> {
     const headers = this.getAuthHeaders();
-    const url = `${this.apiUrl}?limit=1000&offset=0`;
+    const url = `${this.apiUrl}?limit=1000&offset=0`; 
 
     return this.http.get<{ data: Bank[] }>(url, { headers })
       .pipe(map(res => res.data));
