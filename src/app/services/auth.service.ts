@@ -22,7 +22,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // Call backend login API
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, { email, password });
   }
@@ -30,7 +29,6 @@ export class AuthService {
   saveToken(token: string) {
     localStorage.setItem('jwt', token);
 
-    // Decode token and save role in lowercase
     const payload = this.decodeToken(token);
     if (payload?.role) {
       localStorage.setItem('role', payload.role.toLowerCase());
