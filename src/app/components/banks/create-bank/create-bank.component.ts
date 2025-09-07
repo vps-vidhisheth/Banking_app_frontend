@@ -25,13 +25,11 @@ export class CreateBankComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Pre-fill bank name from query params if available
     this.route.queryParams.subscribe(params => {
       this.bankName = params['bankName'] || '';
     });
   }
 
-  // Update URL as user types
   updateUrl(): void {
     this.router.navigate([], {
       relativeTo: this.route,
@@ -73,7 +71,6 @@ export class CreateBankComponent implements OnInit {
         this.bankName = '';
         this.isSubmitting = false;
 
-        // Clear URL after submission and navigate to view page
         this.router.navigate(['/admin-dashboard/banks/view']);
       },
       error: (err) => {
@@ -85,7 +82,6 @@ export class CreateBankComponent implements OnInit {
   }
 
   cancel(): void {
-    // Navigate back to bank list
     this.router.navigate(['/admin-dashboard/banks/view']);
   }
 }

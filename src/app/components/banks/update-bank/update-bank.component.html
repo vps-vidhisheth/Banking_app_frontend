@@ -1,26 +1,30 @@
 
-
 <div class="update-bank-container">
   <h2>Update Bank</h2>
 
-  <div *ngIf="loading">Loading bank details...</div>
-
-  <form *ngIf="!loading" (ngSubmit)="updateBank()">
-    <div>
-      <label for="bankName">Bank Name:</label>
+  <form (ngSubmit)="onSubmit()" #bankForm="ngForm">
+    
+    <div class="form-group">
+      <label for="name">Bank Name</label>
       <input
         type="text"
-        id="bankName"
-        [(ngModel)]="bankName"
-        name="bankName"
+        id="name"
+        name="name"
+        [(ngModel)]="bank.name"
         required
-        (ngModelChange)="updateUrl()"
+        class="form-control"
       />
     </div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="bankForm.invalid">
+      Update Bank
+    </button>
   </form>
 
-  <p>{{ message }}</p>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
 </div>

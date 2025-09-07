@@ -10,8 +10,8 @@ import { UpdateBankComponent } from '../update-bank/update-bank.component';
 import { DeleteBankComponent } from '../delete-bank/delete-bank.component';
 
 const routes: Routes = [
-  { path: '', component: BanksComponent },        // /admin-dashboard/banks
-  { path: 'view', component: ViewBankComponent }, // /admin-dashboard/banks/view
+  { path: '', component: BanksComponent },        
+  { path: 'view', component: ViewBankComponent }, 
   { path: 'create', component: CreateBankComponent },
   { path: 'update/:id', component: UpdateBankComponent }
 ];
@@ -26,7 +26,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    FormsModule,           // ✅ Needed for ngModel
+    FormsModule,          
     RouterModule.forChild(routes)
   ]
 })

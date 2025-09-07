@@ -4,7 +4,7 @@ import { ViewTransactionComponent } from '../viewtransaction/viewtransaction.com
 
 
 const routes: Routes = [
-  { path: '', component: ViewTransactionComponent } // lazy-load at /transactions
+  { path: '', component: ViewTransactionComponent } 
 ];
 
 @NgModule({

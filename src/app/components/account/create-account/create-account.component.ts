@@ -1,8 +1,12 @@
 
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService, AccountPayload } from 'src/app/services/account.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AccountRefreshService } from 'src/app/components/account/account-refresh.service';
+
+
 
 @Component({
   selector: 'app-create-account',
@@ -18,7 +22,8 @@ export class CreateAccountComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private accountRefresh: AccountRefreshService
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +31,6 @@ export class CreateAccountComponent implements OnInit {
       bank_id: ['', [Validators.required]]
     });
 
-    // Pre-fill Bank ID from URL if present
     this.route.queryParams.subscribe(params => {
       if (params['bank_id']) {
         this.createForm.patchValue({ bank_id: params['bank_id'] });
@@ -34,7 +38,6 @@ export class CreateAccountComponent implements OnInit {
     });
   }
 
-  // Update URL dynamically as user types
   updateUrl(): void {
     const bankId = this.createForm.get('bank_id')?.value || '';
     this.router.navigate([], {
@@ -60,8 +63,8 @@ export class CreateAccountComponent implements OnInit {
       next: (res) => {
         this.successMessage = `Account created successfully for Bank ID ${payload.bank_id}.`;
         this.createForm.reset();
-        // Clear URL after successful submission
         this.router.navigate([], { relativeTo: this.route, queryParams: {} });
+        this.accountRefresh.triggerRefresh(); 
       },
       error: (err) => {
         console.error('Error creating account:', err);

@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { ViewAccountComponent } from './view-account/view-account.component';
-import { UpdateAccountComponent } from './update-account/update-account.component';
+import { DepositComponent } from './deposit/deposit.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
+import { TransferComponent } from './transfer/transfer.component'; // ✅ Import
 
 const routes: Routes = [
   {
@@ -12,7 +14,9 @@ const routes: Routes = [
     children: [
       { path: 'create', component: CreateAccountComponent },
       { path: 'view', component: ViewAccountComponent },
-      { path: 'update/:id', component: UpdateAccountComponent },
+      { path: 'deposit/:accountId', component: DepositComponent }, 
+      { path: 'withdraw/:accountId', component: WithdrawComponent },
+       { path: 'transfer/:accountId', component: TransferComponent },
       { path: '', redirectTo: 'view', pathMatch: 'full' }
     ]
   }
@@ -22,4 +26,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AccountRoutingModule { }
+export class AccountRoutingModule {}

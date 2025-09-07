@@ -29,7 +29,6 @@ export class UpdateCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.customerId = this.route.snapshot.paramMap.get('id') || '';
 
-    //  Pre-fill from query params if present
     this.route.queryParams.subscribe(params => {
       if (params['first_name']) this.customer.first_name = params['first_name'];
       if (params['last_name']) this.customer.last_name = params['last_name'];
@@ -37,7 +36,6 @@ export class UpdateCustomerComponent implements OnInit {
       if (params['role']) this.customer.role = params['role'];
     });
 
-    //  Load from backend if ID is valid
     if (this.customerId) {
       this.loadCustomer();
     } else {
@@ -45,7 +43,6 @@ export class UpdateCustomerComponent implements OnInit {
     }
   }
 
-  // Load customer from backend
   loadCustomer(): void {
     this.customerService.getCustomerById(this.customerId).subscribe({
       next: (res: BackendCustomer) => {
@@ -53,7 +50,7 @@ export class UpdateCustomerComponent implements OnInit {
           first_name: res.FirstName || res.first_name || this.customer.first_name,
           last_name: res.LastName || res.last_name || this.customer.last_name,
           email: res.Email || res.email || this.customer.email,
-          password: '', // password is never fetched
+          password: '', 
           role: res.Role || res.role || this.customer.role
         };
       },
@@ -64,7 +61,6 @@ export class UpdateCustomerComponent implements OnInit {
     });
   }
 
-  // Update URL as user types
   updateUrl(): void {
     this.router.navigate([], {
       relativeTo: this.route,
@@ -79,7 +75,6 @@ export class UpdateCustomerComponent implements OnInit {
     });
   }
 
-  // Update customer
   updateCustomer(): void {
     if (!this.customerId) return;
 

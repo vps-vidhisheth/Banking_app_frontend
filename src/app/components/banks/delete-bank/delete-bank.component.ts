@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BankService } from '../../../services/bank.service'; // adjust path if needed
+import { BankService } from '../../../services/bank.service'; 
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./delete-bank.component.css']
 })
 export class DeleteBankComponent {
-  bankId: string = '';   // input from user
-  message: string = '';  // success/error feedback
+  bankId: string = '';   
+  message: string = '';  
 
   constructor(private bankService: BankService, private router: Router) {}
 
@@ -23,7 +23,7 @@ export class DeleteBankComponent {
       next: () => {
         this.message = ' Bank deleted successfully!';
         setTimeout(() => {
-          this.router.navigate(['/banks']); // redirect back to banks list
+          this.router.navigate(['/banks']); 
         }, 1000);
       },
       error: (err) => {

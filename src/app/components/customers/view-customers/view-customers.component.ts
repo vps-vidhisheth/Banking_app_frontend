@@ -1,3 +1,5 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { CustomerService, PaginatedResponse } from '../../../services/customer.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,44 +24,77 @@ export class ViewCustomersComponent implements OnInit {
   loading = false;
 
   page = 1;
-  pageSize = 2;
+  pageSize = 5;
   total = 0;
 
-   constructor(
+  searchQuery: string = '';
+
+  constructor(
     private customerService: CustomerService,
     private router: Router,
     private route: ActivatedRoute   
   ) {}
- ngOnInit(): void {
-  const token = localStorage.getItem('jwt');
-  if (!token) {
-    // Only redirect if really unauthorized
-    console.warn('No token found. Please login.');
-    return;
+
+  ngOnInit(): void {
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      console.warn('No token found. Please login.');
+      return;
+    }
+    this.loadCustomers();
   }
-  this.loadCustomers();
+
+loadCustomers(): void {
+  this.loading = true;
+  this.error = '';
+
+  const offset = (this.page - 1) * this.pageSize;
+
+  const filters: any = {};
+  if (this.searchQuery) {
+    filters.search = this.searchQuery;
+  }
+
+  this.customerService.getCustomers(this.pageSize, offset, filters).subscribe({
+    next: (res: PaginatedResponse) => {
+      this.customers = res.data as Customer[];
+      this.total = res.total;
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error('Error fetching customers:', err);
+      this.error = 'Failed to load customers. Please try again later.';
+      this.customers = [];
+      this.loading = false;
+    }
+  });
 }
 
 
-  loadCustomers(): void {
-    this.loading = true;
-    this.error = '';
+applySearch() {
+  const filters: any = { search: this.searchQuery };
 
-    const offset = (this.page - 1) * this.pageSize;
+  this.page = 1;
+  const offset = (this.page - 1) * this.pageSize;
 
-    this.customerService.getCustomers(this.pageSize, offset).subscribe({
-      next: (res: PaginatedResponse) => {
-        this.customers = res.data as Customer[];
-        this.total = res.total;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error(' Error fetching customers:', err);
-        this.error = 'Failed to load customers. Please try again later.';
-        this.customers = [];
-        this.loading = false;
-      }
-    });
+  this.customerService.getCustomers(this.pageSize, offset, filters).subscribe({
+    next: (res) => {
+      this.customers = res.data;
+      this.total = res.total;
+      this.loading = false;
+    },
+    error: () => {
+      this.error = ' Error fetching customers';
+      this.loading = false;
+    }
+  });
+}
+
+
+  clearSearch(): void {
+    this.searchQuery = '';
+    this.page = 1;
+    this.loadCustomers();
   }
 
   get totalPages(): number {
@@ -80,11 +115,9 @@ export class ViewCustomersComponent implements OnInit {
     this.goToPage(this.page - 1);
   }
 
-updateCustomer(customerId: string): void {
-  this.router.navigate([`/admin-dashboard/customers/update/${customerId}`]);
-}
-
-
+  updateCustomer(customerId: string): void {
+    this.router.navigate([`/admin-dashboard/customers/update/${customerId}`]);
+  }
 
   deleteCustomer(customerId: string): void {
     if (!confirm('Are you sure you want to delete this customer?')) return;
@@ -92,19 +125,19 @@ updateCustomer(customerId: string): void {
     this.loading = true;
     this.customerService.deleteCustomer(customerId).subscribe({
       next: () => {
-        alert('Customer deleted successfully ');
+        alert('Customer deleted successfully');
 
-        // Adjust page if last item deleted
         if (this.customers.length === 1 && this.page > 1) {
           this.page--;
         }
         this.loadCustomers();
       },
       error: (err) => {
-        console.error(' Error deleting customer:', err);
+        console.error('Error deleting customer:', err);
         this.loading = false;
         alert('Failed to delete customer');
       }
     });
   }
 }
+

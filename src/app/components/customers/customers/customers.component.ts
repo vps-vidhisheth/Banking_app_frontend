@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService, PaginatedResponse } from 'src/app/services/customer.service';
 
-// ✅ Match backend model (snake_case)
 export interface Customer {
   customer_id: string;
   first_name: string;
@@ -43,7 +42,7 @@ export class CustomersComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.error('❌ Error fetching customers:', err);
+        console.error(' Error fetching customers:', err);
         this.error = 'Failed to load customers. Please try again later.';
         this.customers = [];
         this.loading = false;

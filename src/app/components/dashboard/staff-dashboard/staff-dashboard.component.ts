@@ -19,11 +19,10 @@ navigateTo(event: Event) {
   const target = event.target as HTMLSelectElement;
   const value = target.value;
   if (value) {
-    // Navigate relative to staff-dashboard
+
     this.router.navigate([`/staff-dashboard/${value}`]);
   }
 }
-
 
   logout() {
     localStorage.clear();

@@ -27,7 +27,7 @@ export class ViewBankComponent implements OnInit {
   loading = false;
 
   page = 1;
-  pageSize = 2; 
+  pageSize = 5; 
   total = 0;
 
   private apiUrl = 'http://localhost:8080/api/v1/banks';
@@ -44,39 +44,58 @@ export class ViewBankComponent implements OnInit {
     this.loadBanks();
   }
 
-  loadBanks(): void {
-    this.loading = true;
-    this.error = '';
 
-    const token = localStorage.getItem('jwt');
-    if (!token) {
-      this.router.navigate(['/login']);
-      return;
-    }
+  searchQuery: string = '';
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+loadBanks(): void {
+  this.loading = true;
+  this.error = '';
 
-    const offset = (this.page - 1) * this.pageSize;
-    const params = new HttpParams()
-      .set('limit', this.pageSize.toString())
-      .set('offset', offset.toString());
-
-    this.http.get<PaginatedResponse>(this.apiUrl, { headers, params }).subscribe({
-      next: (res) => {
-        this.banks = res.data;
-        this.total = res.total;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('❌ Error fetching banks:', err);
-        this.error = 'Failed to load banks. Please try again later.';
-        this.banks = [];
-        this.loading = false;
-      }
-    });
+  const token = localStorage.getItem('jwt');
+  if (!token) {
+    this.router.navigate(['/login']);
+    return;
   }
+
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+
+  const offset = (this.page - 1) * this.pageSize;
+  let params = new HttpParams()
+    .set('limit', this.pageSize.toString())
+    .set('offset', offset.toString());
+
+  if (this.searchQuery) {
+    params = params.set('search', this.searchQuery); 
+  }
+
+  this.http.get<PaginatedResponse>(this.apiUrl, { headers, params }).subscribe({
+    next: (res) => {
+      this.banks = res.data;
+      this.total = res.total;
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error('❌ Error fetching banks:', err);
+      this.error = 'Failed to load banks. Please try again later.';
+      this.banks = [];
+      this.loading = false;
+    }
+  });
+}
+
+applySearch(): void {
+  this.page = 1;
+  this.loadBanks();
+}
+
+clearSearch(): void {
+  this.searchQuery = '';
+  this.page = 1;
+  this.loadBanks();
+}
+
 
   get totalPages(): number {
     return this.pageSize > 0 ? Math.ceil(this.total / this.pageSize) : 0;
@@ -120,7 +139,6 @@ updateBank(bankId: string): void {
       next: () => {
         alert('Bank deleted successfully ');
 
-        // Adjust page if last item deleted
         if (this.banks.length === 1 && this.page > 1) {
           this.page--;
         }

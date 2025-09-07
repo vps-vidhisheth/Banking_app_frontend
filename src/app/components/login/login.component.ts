@@ -22,12 +22,10 @@ export class LoginComponent {
 
     this.authService.login(this.email, this.password).subscribe({
       next: res => {
-        // Save token and role
         this.authService.saveToken(res.token);
 
         const role = this.authService.getRole();
 
-        // Redirect based on role
         if (role === 'admin') {
           this.router.navigate(['/admin-dashboard']);
         } else if (role === 'staff') {
